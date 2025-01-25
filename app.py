@@ -25,7 +25,7 @@ with st.form("Formulario de registro"):
     pregunta_seleccionada = st.selectbox("Pregunta", preguntas)
     opciones_disponibles = df[df["pregunta"] == pregunta_seleccionada]
 
-    opciones_habilitadas = opciones_disponibles[opciones_disponibles["num_respuestas"] < 5]
+    opciones_habilitadas = opciones_disponibles[opciones_disponibles["respuestas"] < 5]
     if opciones_habilitadas.empty:
         st.error("No hay fechas disponibles para esta pregunta.")
     else:
@@ -34,8 +34,8 @@ with st.form("Formulario de registro"):
 
         if enviar:
             # Actualizar el conteo de respuestas
-            idx = (df["pregunta"] == pregunta_seleccionada) & (df["opción"] == opcion)
-            if opciones_habilitadas.loc[opciones_habilitadas["opción"] == opcion, "num_respuestas"].values[0] < 5:
+            idx = (df["pregunta"] == pregunta_seleccionada) & (df["opcion"] == opcion)
+            if opciones_habilitadas.loc[opciones_habilitadas["opcion"] == opcion, "respuestas"].values[0] < 5:
                 df.loc[idx, "num_respuestas"] += 1
                 save_data(df)
                 st.success(f"¡Te has registrado en la opción '{opcion}' con éxito!")
