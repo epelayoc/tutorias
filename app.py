@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
+from datetime import datetime
 
 # Cargar el archivo Excel
 DATA_FILE = "opciones.xlsx"
-df = pd.read_excel(DATA_FILE)
+
 def load_data():
     return pd.read_excel(DATA_FILE)
 
@@ -37,7 +38,21 @@ with st.form("Formulario de registro"):
             idx = (df["pregunta"] == pregunta_seleccionada) & (df["opcion"] == opcion)
             if opciones_habilitadas.loc[opciones_habilitadas["opcion"] == opcion, "respuestas"].values[0] < 5:
                 df.loc[idx, "respuestas"] += 1
-                save_data(df)
+
+                # Registrar nombre y fecha de inscripción
+                fecha_inscripcion = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                new_entry = {
+                    "pregunta": pregunta_seleccionada,
+                    "opcion": opcion,
+                    "nombre": nombre,
+                    "fecha_inscripción": fecha_inscripcion,
+                }
+
+                # Crear un nuevo DataFrame para almacenar esta inscripción
+                new_data = pd.DataFrame([new_entry])
+
+                # Guardar los cambios: actualizar conteo y agregar registro
+                save_data(pd.concat([df, new_data], ignore_index=True))
                 st.success(f"¡Te has registrado en la opción '{opcion}' con éxito!")
             else:
                 st.error("Esta opción ya ha alcanzado el límite de inscripciones.")
