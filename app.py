@@ -29,7 +29,7 @@ with st.form("Formulario de registro"):
     if opciones_habilitadas.empty:
         st.error("No hay fechas disponibles para esta pregunta.")
     else:
-        opcion = st.selectbox("Opciones disponibles", opciones_habilitadas["opción"])
+        opcion = st.selectbox("Opciones disponibles", opciones_habilitadas["opcion"])
         enviar = st.form_submit_button("Registrar")
 
         if enviar:
