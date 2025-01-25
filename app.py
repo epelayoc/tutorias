@@ -5,6 +5,7 @@ from datetime import datetime
 # Cargar el archivo Excel
 DATA_FILE = "opciones.xlsx"
 LIMIT = 1
+nombre_lista = ['Luis', 'Pedro', 'Juan', 'Ana', 'Maria', 'Carlos']
 
 def load_data():
     return pd.read_excel(DATA_FILE)
@@ -23,7 +24,9 @@ preguntas = df["pregunta"].unique()
 
 # Crear un formulario interactivo
 with st.form("Formulario de registro"):
-    nombre = st.text_input("Tu nombre", "")
+    #nombre = st.text_input("Tu nombre", "")
+    nombre = st.selectbox("Tu nombre", nombre_lista)
+
     pregunta_seleccionada = st.selectbox("Pregunta", preguntas)
     opciones_disponibles = df[df["pregunta"] == pregunta_seleccionada]
 
