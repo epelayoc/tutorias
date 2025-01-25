@@ -37,7 +37,7 @@ with st.form("Formulario de registro"):
         if enviar:
             # Actualizar el conteo de respuestas
             idx = (df["pregunta"] == pregunta_seleccionada) & (df["opcion"] == opcion)
-            if opciones_habilitadas.loc[opciones_habilitadas["opcion"] == opcion, "opcion"].values[0] < LIMIT:
+            if opciones_habilitadas.loc[opciones_habilitadas["opcion"] == opcion, "respuestas"].values[0] < LIMIT:
                 df.loc[idx, "respuestas"] += 1
 
                 # Registrar nombre y fecha de inscripción
@@ -60,4 +60,5 @@ with st.form("Formulario de registro"):
 
 # Mostrar el estado actual de las inscripciones
 st.subheader("Estado actual de las inscripciones")
-st.dataframe(df[["pregunta","opcion","respuestas"]])
+df_actual = df[["pregunta","opción","respuestas"]]
+st.dataframe(df_actual)
