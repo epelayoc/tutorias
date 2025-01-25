@@ -3,7 +3,7 @@ import pandas as pd
 
 # Cargar el archivo Excel
 DATA_FILE = "opciones.xlsx"
-
+df = pd.read_excel(DATA_FILE)
 def load_data():
     return pd.read_excel(DATA_FILE)
 
