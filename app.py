@@ -4,6 +4,8 @@ from datetime import datetime
 
 # Cargar el archivo Excel
 DATA_FILE = "opciones.xlsx"
+OUT_FILE = "opciones1.xlsx"
+
 LIMIT = 1
 nombre_lista = ['Luis', 'Pedro', 'Juan', 'Ana', 'Maria', 'Carlos']
 
@@ -11,7 +13,7 @@ def load_data():
     return pd.read_excel(DATA_FILE)
 
 def save_data(df):
-    df.to_excel(DATA_FILE, index=False)
+    df.to_excel(OUT_FILE, index=False)
 
 # Cargar las opciones desde el archivo
 df = load_data()
