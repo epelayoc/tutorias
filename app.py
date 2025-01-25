@@ -4,6 +4,7 @@ from datetime import datetime
 
 # Cargar el archivo Excel
 DATA_FILE = "opciones.xlsx"
+LIMIT = 1
 
 def load_data():
     return pd.read_excel(DATA_FILE)
@@ -26,7 +27,7 @@ with st.form("Formulario de registro"):
     pregunta_seleccionada = st.selectbox("Pregunta", preguntas)
     opciones_disponibles = df[df["pregunta"] == pregunta_seleccionada]
 
-    opciones_habilitadas = opciones_disponibles[opciones_disponibles["respuestas"] < 5]
+    opciones_habilitadas = opciones_disponibles[opciones_disponibles["respuestas"] < LIMIT]
     if opciones_habilitadas.empty:
         st.error("No hay fechas disponibles para esta pregunta.")
     else:
@@ -36,7 +37,7 @@ with st.form("Formulario de registro"):
         if enviar:
             # Actualizar el conteo de respuestas
             idx = (df["pregunta"] == pregunta_seleccionada) & (df["opcion"] == opcion)
-            if opciones_habilitadas.loc[opciones_habilitadas["opcion"] == opcion, "respuestas"].values[0] < 5:
+            if opciones_habilitadas.loc[opciones_habilitadas["opcion"] == opcion, "respuestas"].values[0] < LIMIT:
                 df.loc[idx, "respuestas"] += 1
 
                 # Registrar nombre y fecha de inscripción
