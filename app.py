@@ -60,4 +60,4 @@ with st.form("Formulario de registro"):
 
 # Mostrar el estado actual de las inscripciones
 st.subheader("Estado actual de las inscripciones")
-st.dataframe(df[["pregunta","opcion","opcion"]])
+st.dataframe(df[["pregunta","opcion","respuestas"]])
