@@ -13,7 +13,7 @@ def load_data():
     return pd.read_excel(DATA_FILE)
 
 def save_data(df):
-    df.to_excel(OUT_FILE, index=False)
+    df.to_excel(DATA_FILE, index=False)
 
 # Cargar las opciones desde el archivo
 df = load_data()
