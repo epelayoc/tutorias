@@ -63,5 +63,7 @@ with st.form("Formulario de registro"):
 
 # Mostrar el estado actual de las inscripciones
 st.subheader("Estado actual de las inscripciones")
-df_actual = df[["pregunta","opcion","respuestas"]]
+#df_actual = df[["pregunta","opcion","respuestas"]]
+df_actual = df[["pregunta","opcion","respuestas"]].dropna(subset=['respuestas'])
+
 st.dataframe(df_actual)
